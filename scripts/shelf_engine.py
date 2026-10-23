@@ -5,15 +5,18 @@ No API calls or credentials; tool_request is consumed by the host image tool.
 """
 import argparse
 import base64
+import binascii
 import hashlib
 import html
+import io
 import json
 import math
+import re
 import shutil
 from pathlib import Path
 from PIL import Image, ImageChops, ImageDraw, ImageStat
 
-VERSION = "0.1"
+VERSION = "0.2"
 SCHEMA = "shelf-template/1.0"
 
 class EngineError(ValueError):
@@ -57,6 +60,44 @@ def raster(poly, size):
 def resolve(profile_path, value):
     return (Path(profile_path).resolve().parent / value).resolve()
 
+
+def import_template(bundle_path, library):
+    """Register an exported custom template, retaining original image bytes."""
+    bundle, library = read(bundle_path), Path(library).resolve()
+    need(bundle.get("schema_version") == "shelf-template-bundle/1.0", "unsupported bundle schema")
+    profile = bundle["profile"]
+    tid = profile.get("template_id", "")
+    need(re.fullmatch(r"CUST_[A-Za-z0-9_-]{1,58}", tid) is not None, "custom ID must start CUST_ and use safe characters")
+    need(isinstance(profile.get("name"), str) and profile["name"].strip(), "custom template name required")
+    try:
+        pixels = base64.b64decode(bundle["image"]["data_base64"], validate=True)
+    except (binascii.Error, ValueError) as error:
+        raise EngineError("invalid image base64") from error
+    need(hashlib.sha256(pixels).hexdigest() == profile["image"]["sha256"], "bundle image hash mismatch")
+    with Image.open(io.BytesIO(pixels)) as image:
+        media = {"PNG": ("image/png", ".png"), "JPEG": ("image/jpeg", ".jpg"), "WEBP": ("image/webp", ".webp")}.get(image.format)
+        need(media is not None and media[0] == bundle["image"]["media_type"], "unsupported or mismatched image format")
+        need(image.size == (profile["image"]["width"], profile["image"]["height"]), "bundle image dimensions mismatch")
+        image.verify()
+    profile["image"]["path"] = "../images/" + tid + media[1]
+    profile.setdefault("scope", "用户自定义的可见标定范围")
+    profile.setdefault("kind", "custom_fixture")
+    validate_template(profile, check_image=False)
+    catalog_path = library / "catalog.json"
+    catalog = read(catalog_path) if catalog_path.exists() else {"schema_version": "shelf-catalog/1.0", "engine_version": VERSION, "templates": []}
+    need(catalog.get("schema_version") == "shelf-catalog/1.0", "unsupported custom catalog")
+    need(all(item["id"] != tid for item in catalog["templates"]), "custom ID exists; save a new copy instead of overwriting")
+    target, image_path = library/"templates"/(tid+".json"), library/"images"/(tid+media[1])
+    need(not target.exists() and not image_path.exists(), "custom files exist; choose a new ID")
+    image_path.parent.mkdir(parents=True, exist_ok=True)
+    image_path.write_bytes(pixels)
+    write(target, profile)
+    catalog["engine_version"] = VERSION
+    catalog["templates"].append({"id": tid, "name": profile["name"], "kind": profile["kind"], "profile": "templates/"+tid+".json",
+        "slots": len(profile["slots"]), "calibration": profile["calibration"], "scope": profile["scope"]})
+    write(catalog_path, catalog)
+    return {"profile": str(target), "catalog": str(catalog_path), "image": str(image_path), "template_id": tid}
+
 def validate_template(profile, profile_path=None, check_image=True):
     need(profile.get("schema_version") == SCHEMA, "unsupported template schema")
     need(bool(profile.get("template_id")), "template_id required")
@@ -88,6 +129,8 @@ def validate_template(profile, profile_path=None, check_image=True):
             for key in ("width", "height", "depth"):
                 need(bounds.get(key) is None or (number(bounds[key]) and bounds[key] > 0),
                      "invalid physical bound")
+    region_ids = [r["id"] for r in profile.get("protected_regions", [])]
+    need(len(region_ids) == len(set(region_ids)), "duplicate protected region ID")
     for region in profile.get("protected_regions", []):
         polygon(region["polygon"], region["id"])
     if check_image:
@@ -214,9 +257,11 @@ def scene_spec(profile, plan):
              "scene_id": plan.get("scene_id", fid), "fixture_id": fid, "level_selection": "all"}},
             "calibrated_scope_only": True}
 
-def editor(profile, image_path, out_path):
+def editor(profile, image_path, out_path, custom_url=None):
     # Browser-native SVG geometry editing; the original image bytes are embedded unchanged.
     picture = base64.b64encode(Path(image_path).read_bytes()).decode()
+    with Image.open(image_path) as source:
+        media = {"PNG": "image/png", "JPEG": "image/jpeg", "WEBP": "image/webp"}.get(source.format, "image/png")
     payload = json.dumps(profile, ensure_ascii=False).replace("<", "\\u003c")
     page = r"""<!doctype html><meta charset="utf-8"><title>Shelf slot editor</title>
 <style>body{font:15px system-ui;margin:20px;background:#141b25;color:#edf3fa}
@@ -263,6 +308,13 @@ document.querySelector("#save").onclick=()=>{const blob=new Blob([JSON.stringify
 paint();
 </script>"""
     Path(out_path).parent.mkdir(parents=True, exist_ok=True)
+    page = page.replace("data:image/png;base64,", "data:"+media+";base64,")
+    if custom_url:
+        page = page.replace('<button id="save">', '<button id="clone">另存为自定义模板</button><button id="save">', 1)
+        page = page.replace('<script>', '<script src="custom-store.js"></script><script>', 1)
+        action = 'document.querySelector("#clone").onclick=async()=>{try{const id=await ShelfCustom.clone(data,uri);location.href='+json.dumps(custom_url)+'+"?id="+encodeURIComponent(id)}catch(e){document.querySelector("#info").textContent=e.message}};'
+        position = page.rfind('</script>')
+        page = page[:position]+action+'\n'+page[position:]
     Path(out_path).write_text(page.replace("__DATA__", payload).replace("__IMAGE__", picture), encoding="utf-8")
 
 def compile_job(profile_path, plan_path, out, stage=1, base=None, max_images=5):
@@ -385,7 +437,7 @@ if(!bindings.length)throw Error('至少选择一个格位');const plan={schema_v
     Path(out_path).write_text(page.replace('__DATA__',payload),encoding='utf-8')
 
 
-def gallery(catalog_path, out):
+def gallery(catalog_path, out, custom_catalog=None):
     """Portable local catalog, source copies and self-contained slot editors."""
     out = Path(out)
     need(not out.exists(), "gallery output exists; choose a versioned directory")
@@ -396,24 +448,42 @@ def gallery(catalog_path, out):
         products=read(library_path)['products']
         for value in products.values():
             value['reference_path']=str(resolve(library_path,value['reference_path']))
-    entries = []
-    for item in catalog["templates"]:
-        profile_path = resolve(catalog_path, item["profile"])
-        profile = validate_template(read(profile_path), profile_path)
-        entries.append((profile, resolve(profile_path, profile["image"]["path"])))
+    entries, seen = [], set()
+    catalogs = [(catalog_path, catalog, "basic")]
+    if custom_catalog:
+        catalogs.append((custom_catalog, read(custom_catalog), "custom"))
+    for origin, source_catalog, group in catalogs:
+        for item in source_catalog["templates"]:
+            profile_path = resolve(origin, item["profile"])
+            profile = validate_template(read(profile_path), profile_path)
+            tid=profile["template_id"]
+            need(tid not in seen, "duplicate template ID across catalogs: "+tid)
+            need(re.fullmatch(r"[A-Za-z0-9_-]{1,64}",tid) is not None, "unsafe template ID")
+            seen.add(tid)
+            entries.append((profile, resolve(profile_path, profile["image"]["path"]), group))
     (out / "images").mkdir(parents=True)
-    cards = []
-    for profile, source in entries:
+    ui = Path(__file__).resolve().parents[1]/"assets/template-console"
+    for resource in ui.iterdir():
+        if resource.is_file():
+            shutil.copyfile(resource, out/resource.name)
+    (out/"custom-config.js").write_text("window.SHELF_PRODUCTS="+json.dumps(products,ensure_ascii=False).replace("<","\\u003c")+";\n",encoding="utf-8")
+    cards = {"basic":[], "custom":[]}
+    for profile, source, group in entries:
         tid = profile["template_id"]
         need(tid.isascii() and all(c.isalnum() or c in "_-" for c in tid), "unsafe template ID")
         shutil.copyfile(source, out / "images" / (tid + source.suffix))
-        editor(profile, source, out / (tid + ".html"))
+        editor(profile, source, out / (tid + ".html"), custom_url="custom.html")
         plan_link=''
         if products:
             plan_editor(profile,products,out/(tid+'-plan.html'))
             plan_link=' · <a href="'+tid+'-plan.html">选择商品上货</a>'
-        cards.append('<article><a href="'+tid+'.html"><img loading="lazy" src="images/'+tid+source.suffix+'"></a><h2>'+html.escape(tid+' · '+profile['name'])+'</h2><p>'+html.escape(profile['scope'])+'</p><p>'+str(len(profile['slots']))+'个标定格位 · <a href="'+tid+'.html">打开标定器</a>'+plan_link+'</p></article>')
-    page = '<!doctype html><meta charset="utf-8"><title>货架模板库</title><style>body{background:#101b2b;color:#eef4ff;font:16px system-ui;margin:32px}a{color:#72dbff}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}article{background:#1d2c40;border-radius:14px;padding:16px}img{width:100%;height:290px;object-fit:contain;background:#0b1420}p{line-height:1.7}h2{font-size:19px}</style><h1>货架模板引擎 · '+str(len(entries))+'个起始模板</h1><p>点击图片调整格位、支撑线和挂点，也可选择商品导出上货计划。原有模板仅标注指定可见范围；标注不代表实测尺寸。生图结果仍须逐格验收。</p><section class="grid">'+''.join(cards)+'</section>'
+        registered = ' data-registered-id="'+tid+'"' if group == "custom" else ''
+        cards[group].append('<article'+registered+'><a href="'+tid+'.html"><img loading="lazy" src="images/'+tid+source.suffix+'"></a><h2>'+html.escape(tid+' · '+profile['name'])+'</h2><p>'+html.escape(profile['scope'])+'</p><p>'+str(len(profile['slots']))+'个标定格位 · <a href="'+tid+'.html">打开标定器 / 另存自定义</a>'+plan_link+'</p></article>')
+    page = '''<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>货架模板库 · 基础与自定义</title><style>
+body{background:#101b2b;color:#eef4ff;font:16px system-ui;margin:32px}a{color:#72dbff}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}article{background:#1d2c40;border-radius:14px;padding:16px}img{width:100%;height:290px;object-fit:contain;background:#0b1420}p{line-height:1.7}article h2{font-size:19px}.hero{padding:26px;background:#203750;border-radius:16px;margin-bottom:26px}.actions{display:flex;flex-wrap:wrap;gap:14px;align-items:center}.button{padding:12px 20px;border-radius:8px;background:#8fe4ff;color:#102133;text-decoration:none;font-weight:700}label{padding:10px;background:#2d4865;border-radius:8px}h2.section{margin-top:38px}.muted{color:#adc0d4}
+</style><h1>货架模板引擎</h1><section class="hero"><h2>选基础模板，也能建立自己的模板库</h2><p>导入空货架图，自定义格位、支撑线、挂点和保护区；或从现有模板另存副本。保存后可重复选择商品上货。</p><div class="actions"><a class="button" id="new-template" href="custom.html">＋ 新建自定义模板</a><a href="#basics">浏览基础模板</a><a href="#mine">我的自定义模板</a><label>恢复模板包 <input id="restoreBundle" type="file" accept=".json"></label></div></section>
+<h2 class="section" id="mine">我的自定义模板</h2><p class="muted">本机已注册模板与当前浏览器保存的模板均可选择。浏览器模板可导出包含原图的模板包，交给Codex注册到生成引擎。</p><p id="custom-status" role="status"></p><section class="grid">'''+''.join(cards["custom"])+'''</section><section class="grid" id="custom-list"></section>
+<h2 class="section" id="basics">基础模板 · '''+str(len(cards["basic"]))+'''组</h2><p>这些是起始选择，可以直接上货，也可以打开标定器“另存为自定义模板”。标注仅覆盖已标定范围，不代表实测尺寸。</p><section class="grid">'''+''.join(cards["basic"])+'''</section><script src="custom-store.js"></script><script src="gallery-custom.js"></script></html>'''
     (out/'index.html').write_text(page,encoding='utf-8')
     return out/'index.html'
 
@@ -458,6 +528,8 @@ def main():
     sub=parser.add_subparsers(dest="command",required=True)
     p=sub.add_parser("list");p.add_argument("catalog",type=Path)
     p=sub.add_parser("gallery");p.add_argument("catalog",type=Path);p.add_argument("--out",type=Path,required=True)
+    p.add_argument("--custom-catalog",type=Path)
+    p=sub.add_parser("import-template");p.add_argument("bundle",type=Path);p.add_argument("--library",type=Path,required=True)
     p=sub.add_parser("validate");p.add_argument("profile",type=Path);p.add_argument("--plan",type=Path)
     p=sub.add_parser("editor");p.add_argument("profile",type=Path);p.add_argument("--out",type=Path,required=True)
     p=sub.add_parser("compile");p.add_argument("profile",type=Path);p.add_argument("plan",type=Path)
@@ -470,7 +542,9 @@ def main():
         if args.command=="list":
             print(json.dumps(read(args.catalog),ensure_ascii=False,indent=2))
         elif args.command=="gallery":
-            print(gallery(args.catalog,args.out))
+            print(gallery(args.catalog,args.out,args.custom_catalog))
+        elif args.command=="import-template":
+            print(json.dumps(import_template(args.bundle,args.library),ensure_ascii=False,indent=2))
         elif args.command=="validate":
             profile=validate_template(read(args.profile),args.profile)
             fit=validate_plan(profile,read(args.plan),args.plan) if args.plan else {}

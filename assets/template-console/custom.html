@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>自定义货架模板</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font:15px system-ui;background:#101b2b;color:#edf3ff}a{color:#73d9ff}header{padding:22px 28px;border-bottom:1px solid #34465f;display:flex;gap:20px;align-items:center}header h1{font-size:24px;margin:0}input,select,button,textarea{font:inherit;padding:8px;border-radius:6px;border:1px solid #52708c}button{cursor:pointer;background:#bcecff;color:#08243a}input,select,textarea{background:#1a2b40;color:#edf3ff}button.secondary{background:#243b55;color:#e3f3ff}label{display:block;margin:9px 0}label input,label select{width:100%;margin-top:5px}.layout{display:grid;grid-template-columns:minmax(0,1fr) 350px;gap:20px;padding:20px}.stage{position:sticky;top:12px;align-self:start;background:#080f1a;min-height:440px}svg{display:block;width:100%;max-height:82vh;touch-action:none}.controls{max-height:82vh;overflow:auto;padding:0 10px 10px 0}.row{display:flex;gap:8px;flex-wrap:wrap}.row label{flex:1;min-width:80px}p{line-height:1.7}.muted{color:#a2b8d0}.box{padding:15px;background:#1c2c40;border-radius:10px;margin:12px 0}#status{padding:12px 28px;white-space:pre-wrap;background:#21344a;min-height:48px}#stock{padding:20px;overflow:auto}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:10px;border-bottom:1px solid #3c516b}td input{width:70px}#empty{padding:80px 30px;text-align:center}@media(max-width:850px){.layout{grid-template-columns:1fr}.stage{position:relative}.controls{max-height:none}header{flex-wrap:wrap}}
+[hidden]{display:none!important}
+</style>
+<header><a href="index.html">← 模板库</a><h1>自定义模板工作台</h1><span class="muted">导入自己的空架，或从基础模板复制</span></header>
+<div id="status" role="status">请选择底图，或从模板库打开已保存的自定义模板。</div>
+<div class="layout">
+ <main class="stage"><div id="empty">导入一张空货架图片开始标定<br><small>原图保留；格位、支撑线和保护区通过SVG叠层编辑</small></div><svg id="canvas" xmlns="http://www.w3.org/2000/svg" hidden></svg></main>
+ <aside class="controls">
+ <div class="box"><label>导入空货架图片<input id="imageFile" type="file" accept="image/png,image/jpeg,image/webp"></label><label>恢复模板包<input id="bundleFile" type="file" accept=".json"></label></div>
+ <label>模板名称<input id="name" placeholder="例如：门店A · 收纳墙"></label><label>模板类型<select id="kind"><option value="front_wall">正面货架墙</option><option value="oblique_wall">斜视货架</option><option value="front_mixed">挂钩与层板组合</option><option value="bin_aisle">促销筐与通道</option><option value="table_zone">低桌展台</option><option value="custom_fixture">其他自定义架体</option></select></label>
+ <div class="row"><button id="addSlot">＋ 添加格位</button><button id="addProtect" class="secondary">＋ 保护区</button></div>
+ <label>编辑对象<select id="pick"></select></label><div class="row"><button id="moveUp" class="secondary">顺序上移</button><button id="moveDown" class="secondary">顺序下移</button><button id="remove" class="secondary">移除此标注</button></div>
+ <label>拖动目标<select id="part"><option value="polygon">范围四角</option><option value="support_line">支撑线</option><option value="anchors">挂点</option></select></label>
+ <div id="slotFields"><div class="row"><label>模块<input id="module" value="A"></label><label>层位<input id="level" value="L1"></label></div>
+ <label>支撑方式<select id="support"><option value="shelf">层板</option><option value="peg">挂钩</option><option value="basket">促销筐</option><option value="platform">桌面/台面</option></select></label>
+ <div class="row"><label>挂点数量<input id="pegCount" type="number" min="1" max="40" value="4"></label><button id="resetPegs" class="secondary">建立示意挂点</button></div>
+ <p class="muted">示意挂点须逐点对齐原图，不代表自动识别。</p>
+ <div class="row"><label>宽cm<input id="width" type="number" min="0" step="any"></label><label>高cm<input id="height" type="number" min="0" step="any"></label><label>深cm<input id="depth" type="number" min="0" step="any"></label></div>
+ <label>尺寸来源<select id="basis"><option value="">未知，不设尺寸</option><option value="user_measured">用户实测</option><option value="manufacturer_spec">厂家规格</option><option value="concept_assumption">设计假设</option></select></label></div>
+ <p class="muted">白点可拖动；青色为可上货范围，红色为保持区，黄线为承托线。按模块内从上到下排列格位，避开立柱与层板。尺寸未知请留空。</p>
+ <div class="row"><button id="save">保存到我的模板</button><button id="export" class="secondary">导出模板包</button><button id="copy" class="secondary">另存副本</button></div>
+ <p class="muted">“我的模板”保存在当前浏览器。导出包含原图与标注的模板包，可跨机器恢复并交给Codex注册到引擎。</p>
+ </aside>
+</div>
+<section id="stock"><h2>使用这个模板上货</h2><p>保存标定后，逐格选商品并导出计划。编译时需先将模板包注册到自定义模板库。</p><div id="stockRows"></div><button id="exportPlan">导出上货计划</button></section>
+<script src="custom-store.js"></script><script src="custom-config.js"></script><script src="custom.js"></script></html>

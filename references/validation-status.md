@@ -26,6 +26,8 @@
 
 ## 可复现的程序检查
 
+V1.3新增自定义模板新建、复制、浏览器保存/恢复与本机模板库注册。两种入口的实际浏览器导出与原编译器衔接已验证；36项程序检查通过。详见[自定义模板实测](template-engine-validation.md)。本轮没有新增生图或扩大精确控制承诺。
+
 运行：
 ```powershell
 python -m unittest discover -s tests -v

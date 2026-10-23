@@ -1,4 +1,4 @@
-# 货架模板引擎（V1.2 / engine 0.1）
+# 货架模板引擎（V1.3 / engine 0.2）
 
 ## 何时使用
 
@@ -17,10 +17,25 @@ python scripts/shelf_engine.py gallery assets/shelf-templates/catalog.json --out
 
 打开生成的index.html，所有页面都可在本地离线使用：
 
+- **基础模板**：现有11张是起始选择，可直接上货；打开标定器后点“另存为自定义模板”，建立带独立ID的副本。基础配置和底图保持。
+- **我的自定义模板**：“新建自定义模板”导入PNG/JPEG/WebP空架原图，添加/移除/排序格位及保护区，设置层板/挂钩/筐/桌面支撑方式，再拖动角点、支撑线与挂点。新建矩形和挂点只是示意，必须手动对齐原图。可以修改名称与带来源的宽高深。
+- “保存到我的模板”写入当前浏览器的IndexedDB，返回目录后可重复选用；“导出模板包”下载.shelf.json，包含原图原字节、哈希和完整配置，能跨浏览器/机器恢复。浏览器存储与本机文件库是两个存储位置；清理浏览器数据会影响前者，模板包可恢复。浏览器若限制file://存储，可在生成目录运行python -m http.server --bind 127.0.0.1并用固定本机地址访问。
+- 自定义工作台也支持逐格选品与上货计划导出。浏览器页面不直接写入本机Skill或调用生图模型；将模板包注册到本机库后，同一计划即可进入原编译/生成流程。
+
 - “打开标定器”：选择格位，分别拖动四角、黄色支撑线端点、橙色挂点。下载配置后放回原templates目录，或调整image.path。重新validate；下载不会自动覆盖原配置。
 - “选择商品上货”：逐格选择商品、姿态、正面数量和纵深数量，下载shelf-plan JSON。未选格位保持当前底图原样。这个界面只导出计划，不在浏览器内生图或认证尺寸。
 - 自有商品：编辑products/library.json添加参考路径、名称、姿态包络尺寸和身份约束，再重建控制台。商品参考须先单独看图。路径相对于library.json；下载的计划会转换成当前机器的绝对路径。
 - 宽高深未知时填null，不能为通过校验编造尺寸。实际尺寸有来源时记录user_measured或manufacturer_spec。concept_assumption仅用于设计假设，不能声称已实测。
+
+注册浏览器导出的自定义模板包，使用单独的用户库（示例目录位于Skill目录外），再合并基础和自定义目录：
+
+```powershell
+python scripts/shelf_engine.py import-template "CUST-example.shelf.json" --library "../my-shelf-templates"
+python scripts/shelf_engine.py gallery assets/shelf-templates/catalog.json --custom-catalog "../my-shelf-templates/catalog.json" --out work/my-console-v1
+python scripts/shelf_engine.py compile "../my-shelf-templates/templates/CUST-example.json" "CUST-example-plan.json" --out work/custom-job-v1
+```
+
+示例文件名须换成实际导出ID。import-template核查原图哈希、尺寸、格式与几何，原字节复制图片，并重设库内相对路径；不沿用模板包指定的写入路径。同ID已有文件时拒绝覆盖，修改后需要在工作台“另存副本”生成新ID再导入。合并目录保留基础分组；同一ID同时在浏览器和已注册库中出现时，优先显示浏览器的可编辑卡片。自定义模板库不自动上传远端，也不依赖Skill更新来保存。
 
 命令示例：
 

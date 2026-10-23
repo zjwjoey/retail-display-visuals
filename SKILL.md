@@ -2,7 +2,7 @@
 name: retail-display-visuals
 description: 根据实拍、空货架与风格参考制作商超或展厅陈列图，支持货架模板格位标定、指定商品上货、局部改造及成套一致性。用户要求陈列图、空架上货或货架模板引擎时使用；仅做商品翻译、SKU数据整理或视频剪辑时不使用。
 metadata:
-  version: "1.2"
+  version: "1.3"
 ---
 
 # 商超陈列效果图
@@ -18,7 +18,7 @@ metadata:
 
 “近景”指完整的一面指定陈列墙，包含左右边界、顶部和底部；局部商品特写不满足此模式。
 
-空架上货、格位约束或重复同机位方案：读取[货架模板引擎](references/shelf-template-engine.md)，使用scripts/shelf_engine.py与assets/shelf-templates/catalog.json。先核查底图、格位和商品参考，编译上货计划，再按job的tool_request调用当前图像工具，逐格检查输出。11张起始模板仅覆盖已标定的可见范围；尺寸假设不能当实测；黑白mask是参考引导，不保证强制保留像素。[本轮引擎实测](references/template-engine-validation.md)包含失败边界。
+空架上货、格位约束或重复同机位方案：读取[货架模板引擎](references/shelf-template-engine.md)，使用scripts/shelf_engine.py与assets/shelf-templates/catalog.json。11张现有图片只是基础选择；用户可导入空架新建、从基础模板复制，或选自己的已保存模板。收到.shelf.json模板包时，用import-template注册到用户单独的模板库，再合并目录；不将基础模板覆盖为自定义内容。核查底图、格位和商品参考，编译计划后按job的tool_request调用当前图像工具并逐格检查。尺寸假设不能当实测；黑白mask是参考引导，不保证强制保留像素。[引擎实测](references/template-engine-validation.md)包含失败边界。
 
 ## 读取需求与参考
 
