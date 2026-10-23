@@ -105,7 +105,7 @@ class ShelfEngineTests(unittest.TestCase):
             job=engine.compile_job(self.profile_path,self.plan_path,out)
             self.assertEqual(len(job["tool_request"]["referenced_image_paths"]),5)
             self.assertEqual(job["mask_enforcement"],"reference_only")
-            scene.validate(engine.read(out/"scene-spec.json"))
+            scene.validate(engine.read(out/"scene-spec.json"),out,check_files=True)
             with self.assertRaisesRegex(engine.EngineError,"output exists"):
                 engine.compile_job(self.profile_path,self.plan_path,out)
             resumed=engine.compile_job(self.profile_path,self.plan_path,Path(folder)/"next",

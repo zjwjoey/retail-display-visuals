@@ -346,6 +346,8 @@ def compile_job(profile_path, plan_path, out, stage=1, base=None, max_images=5):
     for pid, product in scene["products"].items():
         if pid != "KEEP_BASE":
             product["reference_path"] = str(resolve(plan_path, product["reference_path"]))
+    scene["products"]["KEEP_BASE"].update(reference_path=str(base),
+        reference_role="base_context_not_a_product")
     scene["assets"] = {"template_base": {"path": str(original), "role": "fixed_camera_layout", "approval": "geometry_scope_only"}}
     scene["views"]["TEMPLATE_VIEW"]["asset_id"] = "template_base"
     scene["views"]["TEMPLATE_VIEW"]["mode"] = "wide" if "aisle" in profile["kind"] else "detail"
