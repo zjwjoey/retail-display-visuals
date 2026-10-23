@@ -1,0 +1,178 @@
+{
+  "schema_version": "shelf-template/1.0",
+  "template_id": "E002",
+  "name": "侧视长墙·近侧一格",
+  "kind": "oblique_wall",
+  "calibration": "manual_visible_scope",
+  "scope": "近侧完整模块的中下部三格",
+  "image": {
+    "path": "../images/E002.png",
+    "width": 941,
+    "height": 1672,
+    "sha256": "4fa0b12366ab731d034b7b57982cd38998823fa3167309be3a7144dc7818dfd0"
+  },
+  "provenance": {
+    "kind": "user_provided_reference_unverified",
+    "source": "G:\\1.视频素材\\ai视频资料\\3.货架模板\\image-gen-1(20260911-142549).png",
+    "verified_real_measurements": false
+  },
+  "placement": {
+    "camera": "fixed_to_template_image",
+    "same_scene_with_other_templates": "not_established"
+  },
+  "slots": [
+    {
+      "id": "A/L1",
+      "module": "A",
+      "level": "L1",
+      "support": "shelf",
+      "polygon": [
+        [
+          0.09,
+          0.36
+        ],
+        [
+          0.316,
+          0.38
+        ],
+        [
+          0.316,
+          0.423
+        ],
+        [
+          0.09,
+          0.411
+        ]
+      ],
+      "support_line": [
+        [
+          0.09,
+          0.411
+        ],
+        [
+          0.316,
+          0.423
+        ]
+      ]
+    },
+    {
+      "id": "A/L2",
+      "module": "A",
+      "level": "L2",
+      "support": "shelf",
+      "polygon": [
+        [
+          0.09,
+          0.45
+        ],
+        [
+          0.316,
+          0.447
+        ],
+        [
+          0.316,
+          0.477
+        ],
+        [
+          0.09,
+          0.491
+        ]
+      ],
+      "support_line": [
+        [
+          0.09,
+          0.491
+        ],
+        [
+          0.316,
+          0.477
+        ]
+      ]
+    },
+    {
+      "id": "A/L3",
+      "module": "A",
+      "level": "L3",
+      "support": "shelf",
+      "polygon": [
+        [
+          0.09,
+          0.522
+        ],
+        [
+          0.316,
+          0.501
+        ],
+        [
+          0.316,
+          0.531
+        ],
+        [
+          0.09,
+          0.568
+        ]
+      ],
+      "support_line": [
+        [
+          0.09,
+          0.568
+        ],
+        [
+          0.316,
+          0.531
+        ]
+      ]
+    }
+  ],
+  "protected_regions": [
+    {
+      "id": "ceiling",
+      "polygon": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0.1
+        ],
+        [
+          0,
+          0.1
+        ]
+      ]
+    },
+    {
+      "id": "foreground",
+      "polygon": [
+        [
+          0,
+          0.95
+        ],
+        [
+          1,
+          0.95
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    }
+  ],
+  "constraints": [
+    "保留镜头、货架数量、层板位置、立柱、顶棚与地面",
+    "只编辑本次选定格位；其他可见区域不作为新增陈列区",
+    "商品可遮挡选中格内背板；不得穿越格位支撑和立柱",
+    "未知实际尺寸；concept_assumption仅为可改设计参数"
+  ],
+  "calibration_notes": "浏览器叠层人工复核并收紧；仅图像可见范围，无实测尺寸"
+}

@@ -1,0 +1,134 @@
+{
+  "schema_version": "shelf-plan/1.0",
+  "template_id": "N01",
+  "scene_id": "TEMPLATE_N01_DEMO",
+  "business": {
+    "format": "general_merchandise",
+    "scope": "one_module_test"
+  },
+  "products": {
+    "PLATE": {
+      "name": "三色南瓜造型盘",
+      "reference_path": "../products/plate.jpeg",
+      "dimensions_cm": {
+        "width": 40,
+        "height": 32
+      },
+      "identity_constraints": [
+        "保留南瓜轮廓和浮雕线；不加面部"
+      ],
+      "packaging_status": "loose_display_concept",
+      "display_envelopes_cm": {
+        "upright": {
+          "width": 40,
+          "height": 32,
+          "depth": null,
+          "basis": "catalog_width_height"
+        },
+        "stacked_flat": {
+          "width": 40,
+          "height": 10,
+          "depth": 32,
+          "basis": "catalog_planar_size_plus_concept_stack_height"
+        }
+      }
+    },
+    "GOBLET": {
+      "name": "红银蜘蛛高脚杯",
+      "reference_path": "../products/goblet.jpeg",
+      "dimensions_cm": {
+        "width": 7.5,
+        "height": 18
+      },
+      "identity_constraints": [
+        "红色杯身、银色蜘蛛装饰和银柄圆底"
+      ],
+      "display_envelopes_cm": {
+        "upright": {
+          "width": 7.5,
+          "height": 18,
+          "depth": null,
+          "basis": "catalog_width_height"
+        }
+      }
+    },
+    "LANTERN": {
+      "name": "小南瓜灯",
+      "reference_path": "../products/lantern.jpeg",
+      "dimensions_cm": {
+        "width": 13,
+        "height": 11
+      },
+      "identity_constraints": [
+        "保留斜眼、嘴形和麻绳环"
+      ],
+      "display_envelopes_cm": {
+        "upright": {
+          "width": 13,
+          "height": 11,
+          "depth": null,
+          "basis": "catalog_width_height"
+        }
+      }
+    },
+    "BUCKET": {
+      "name": "橙色南瓜糖果桶",
+      "reference_path": "../products/bucket.jpeg",
+      "dimensions_cm": {
+        "width": 18,
+        "height": 14
+      },
+      "identity_constraints": [
+        "原黑脸谱、黑提手；低格提手放下"
+      ],
+      "display_envelopes_cm": {
+        "upright": {
+          "width": 18,
+          "height": 14,
+          "depth": null,
+          "basis": "catalog_width_height"
+        },
+        "binned": {
+          "width": 18,
+          "height": 14,
+          "depth": null,
+          "basis": "catalog_width_height"
+        }
+      }
+    }
+  },
+  "bindings": [
+    {
+      "slot_id": "A/L1",
+      "product_id": "PLATE",
+      "orientation": "stacked_flat",
+      "front_count": 2,
+      "depth_count": 1,
+      "gap_cm": 4
+    },
+    {
+      "slot_id": "A/L2",
+      "product_id": "GOBLET",
+      "orientation": "upright",
+      "front_count": 6,
+      "depth_count": 1,
+      "gap_cm": 3
+    },
+    {
+      "slot_id": "A/L3",
+      "product_id": "LANTERN",
+      "orientation": "upright",
+      "front_count": 5,
+      "depth_count": 1,
+      "gap_cm": 3
+    },
+    {
+      "slot_id": "A/L4",
+      "product_id": "BUCKET",
+      "orientation": "upright",
+      "front_count": 4,
+      "depth_count": 1,
+      "gap_cm": 4
+    }
+  ]
+}

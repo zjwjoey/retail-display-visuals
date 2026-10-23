@@ -1,0 +1,109 @@
+{
+  "schema_version": "shelf-template/1.0",
+  "template_id": "E007",
+  "name": "形象展区·中间低桌",
+  "kind": "table_zone",
+  "calibration": "manual_visible_scope",
+  "scope": "只开放中间桌面上方的商品遮挡区，后墙不是同一平面",
+  "image": {
+    "path": "../images/E007.png",
+    "width": 941,
+    "height": 1672,
+    "sha256": "ae8411ad72fdaf0ac8796e3cc2de8853475fdfb085475312a2053fdc6166e6a7"
+  },
+  "provenance": {
+    "kind": "user_provided_reference_unverified",
+    "source": "G:\\1.视频素材\\ai视频资料\\3.货架模板\\image-gen-5(20260911-135304).png",
+    "verified_real_measurements": false
+  },
+  "placement": {
+    "camera": "fixed_to_template_image",
+    "same_scene_with_other_templates": "not_established"
+  },
+  "slots": [
+    {
+      "id": "A/L1",
+      "module": "A",
+      "level": "L1",
+      "support": "platform",
+      "polygon": [
+        [
+          0.441,
+          0.399
+        ],
+        [
+          0.748,
+          0.402
+        ],
+        [
+          0.748,
+          0.446
+        ],
+        [
+          0.441,
+          0.442
+        ]
+      ],
+      "support_line": [
+        [
+          0.441,
+          0.442
+        ],
+        [
+          0.748,
+          0.446
+        ]
+      ]
+    }
+  ],
+  "protected_regions": [
+    {
+      "id": "ceiling",
+      "polygon": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0.1
+        ],
+        [
+          0,
+          0.1
+        ]
+      ]
+    },
+    {
+      "id": "foreground",
+      "polygon": [
+        [
+          0,
+          0.95
+        ],
+        [
+          1,
+          0.95
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    }
+  ],
+  "constraints": [
+    "保留镜头、货架数量、层板位置、立柱、顶棚与地面",
+    "只编辑本次选定格位；其他可见区域不作为新增陈列区",
+    "商品可遮挡选中格内背板；不得穿越格位支撑和立柱",
+    "未知实际尺寸；concept_assumption仅为可改设计参数"
+  ]
+}

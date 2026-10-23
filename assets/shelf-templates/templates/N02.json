@@ -1,0 +1,434 @@
+{
+  "schema_version": "shelf-template/1.0",
+  "template_id": "N02",
+  "name": "三排四钩加两层托板",
+  "kind": "front_mixed",
+  "calibration": "reviewed_visible_scope",
+  "scope": "三行挂区及两层托板；第三挂区适合较短挂件",
+  "image": {
+    "path": "../images/N02_peg_three_rows.png",
+    "width": 1086,
+    "height": 1448,
+    "sha256": "4ec005d46d0a1bb7f94479448fbdf1ae9b588a145a3c7ee9267c34da34ef484e"
+  },
+  "provenance": {
+    "kind": "generated_empty_template",
+    "source": "C:\\Users\\Administrator\\.codex\\generated_images\\01a167b2-b757-7c33-a885-0bd2cf9ee908\\exec-e805f902-1d1a-4f68-80c6-5a6cc31c7cc9.png",
+    "verified_real_measurements": false
+  },
+  "placement": {
+    "camera": "fixed_to_template_image",
+    "same_scene_with_other_templates": "not_established"
+  },
+  "slots": [
+    {
+      "id": "A/H1",
+      "module": "A",
+      "level": "H1",
+      "support": "peg",
+      "polygon": [
+        [
+          0.224,
+          0.173
+        ],
+        [
+          0.779,
+          0.173
+        ],
+        [
+          0.779,
+          0.326
+        ],
+        [
+          0.224,
+          0.326
+        ]
+      ],
+      "support_line": [
+        [
+          0.27,
+          0.178
+        ],
+        [
+          0.73,
+          0.178
+        ]
+      ],
+      "anchors": [
+        [
+          0.27,
+          0.178
+        ],
+        [
+          0.422,
+          0.178
+        ],
+        [
+          0.577,
+          0.178
+        ],
+        [
+          0.73,
+          0.178
+        ]
+      ],
+      "physical_cm": {
+        "width": 100,
+        "height": 31,
+        "depth": null,
+        "basis": "concept_assumption"
+      }
+    },
+    {
+      "id": "A/H2",
+      "module": "A",
+      "level": "H2",
+      "support": "peg",
+      "polygon": [
+        [
+          0.224,
+          0.325
+        ],
+        [
+          0.779,
+          0.325
+        ],
+        [
+          0.779,
+          0.475
+        ],
+        [
+          0.224,
+          0.475
+        ]
+      ],
+      "support_line": [
+        [
+          0.27,
+          0.328
+        ],
+        [
+          0.73,
+          0.328
+        ]
+      ],
+      "anchors": [
+        [
+          0.27,
+          0.328
+        ],
+        [
+          0.422,
+          0.328
+        ],
+        [
+          0.577,
+          0.328
+        ],
+        [
+          0.73,
+          0.328
+        ]
+      ],
+      "physical_cm": {
+        "width": 100,
+        "height": 31,
+        "depth": null,
+        "basis": "concept_assumption"
+      }
+    },
+    {
+      "id": "A/H3",
+      "module": "A",
+      "level": "H3",
+      "support": "peg",
+      "polygon": [
+        [
+          0.224,
+          0.477
+        ],
+        [
+          0.779,
+          0.477
+        ],
+        [
+          0.779,
+          0.597
+        ],
+        [
+          0.224,
+          0.597
+        ]
+      ],
+      "support_line": [
+        [
+          0.27,
+          0.477
+        ],
+        [
+          0.73,
+          0.477
+        ]
+      ],
+      "anchors": [
+        [
+          0.27,
+          0.477
+        ],
+        [
+          0.422,
+          0.477
+        ],
+        [
+          0.577,
+          0.477
+        ],
+        [
+          0.73,
+          0.477
+        ]
+      ],
+      "physical_cm": {
+        "width": 100,
+        "height": 24,
+        "depth": null,
+        "basis": "concept_assumption"
+      }
+    },
+    {
+      "id": "A/L1",
+      "module": "A",
+      "level": "L1",
+      "support": "shelf",
+      "polygon": [
+        [
+          0.224,
+          0.601
+        ],
+        [
+          0.779,
+          0.601
+        ],
+        [
+          0.779,
+          0.649
+        ],
+        [
+          0.224,
+          0.649
+        ]
+      ],
+      "support_line": [
+        [
+          0.224,
+          0.649
+        ],
+        [
+          0.779,
+          0.649
+        ]
+      ],
+      "physical_cm": {
+        "width": 100,
+        "height": 12,
+        "depth": 35,
+        "basis": "concept_assumption"
+      }
+    },
+    {
+      "id": "A/L2",
+      "module": "A",
+      "level": "L2",
+      "support": "shelf",
+      "polygon": [
+        [
+          0.224,
+          0.701
+        ],
+        [
+          0.779,
+          0.701
+        ],
+        [
+          0.779,
+          0.802
+        ],
+        [
+          0.224,
+          0.802
+        ]
+      ],
+      "support_line": [
+        [
+          0.224,
+          0.802
+        ],
+        [
+          0.779,
+          0.802
+        ]
+      ],
+      "physical_cm": {
+        "width": 100,
+        "height": 35,
+        "depth": 35,
+        "basis": "concept_assumption"
+      }
+    }
+  ],
+  "protected_regions": [
+    {
+      "id": "ceiling",
+      "polygon": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0.1
+        ],
+        [
+          0,
+          0.1
+        ]
+      ]
+    },
+    {
+      "id": "foreground",
+      "polygon": [
+        [
+          0,
+          0.95
+        ],
+        [
+          1,
+          0.95
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "left_post",
+      "polygon": [
+        [
+          0.182,
+          0.071
+        ],
+        [
+          0.217,
+          0.071
+        ],
+        [
+          0.217,
+          0.925
+        ],
+        [
+          0.182,
+          0.925
+        ]
+      ]
+    },
+    {
+      "id": "right_post",
+      "polygon": [
+        [
+          0.784,
+          0.071
+        ],
+        [
+          0.821,
+          0.071
+        ],
+        [
+          0.821,
+          0.925
+        ],
+        [
+          0.784,
+          0.925
+        ]
+      ]
+    },
+    {
+      "id": "header",
+      "polygon": [
+        [
+          0.217,
+          0.072
+        ],
+        [
+          0.783,
+          0.072
+        ],
+        [
+          0.783,
+          0.132
+        ],
+        [
+          0.217,
+          0.132
+        ]
+      ]
+    },
+    {
+      "id": "board_upper",
+      "polygon": [
+        [
+          0.217,
+          0.673
+        ],
+        [
+          0.783,
+          0.673
+        ],
+        [
+          0.783,
+          0.689
+        ],
+        [
+          0.217,
+          0.689
+        ]
+      ]
+    },
+    {
+      "id": "board_lower",
+      "polygon": [
+        [
+          0.21,
+          0.851
+        ],
+        [
+          0.79,
+          0.851
+        ],
+        [
+          0.79,
+          0.869
+        ],
+        [
+          0.21,
+          0.869
+        ]
+      ]
+    }
+  ],
+  "constraints": [
+    "保留镜头、货架数量、层板位置、立柱、顶棚与地面",
+    "只编辑本次选定格位；其他可见区域不作为新增陈列区",
+    "商品可遮挡选中格内背板；不得穿越格位支撑和立柱",
+    "未知实际尺寸；concept_assumption仅为可改设计参数"
+  ]
+}

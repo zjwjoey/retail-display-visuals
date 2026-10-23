@@ -1,0 +1,149 @@
+{
+  "schema_version": "shelf-template/1.0",
+  "template_id": "E008",
+  "name": "入口大景·双促销筐",
+  "kind": "bin_aisle",
+  "calibration": "manual_visible_scope",
+  "scope": "只开放左右筐内上方，筐正面木板及边框保护",
+  "image": {
+    "path": "../images/E008.png",
+    "width": 941,
+    "height": 1672,
+    "sha256": "cbd064fe6434eed8c6e87cd99ba4902719e3990d0c499827fef34d0d073da01c"
+  },
+  "provenance": {
+    "kind": "user_provided_reference_unverified",
+    "source": "G:\\1.视频素材\\ai视频资料\\3.货架模板\\image-gen-6(20260911-134149).png",
+    "verified_real_measurements": false
+  },
+  "placement": {
+    "camera": "fixed_to_template_image",
+    "same_scene_with_other_templates": "not_established"
+  },
+  "slots": [
+    {
+      "id": "A/L1",
+      "module": "A",
+      "level": "L1",
+      "support": "basket",
+      "polygon": [
+        [
+          0.028,
+          0.456
+        ],
+        [
+          0.323,
+          0.456
+        ],
+        [
+          0.323,
+          0.522
+        ],
+        [
+          0.028,
+          0.522
+        ]
+      ],
+      "support_line": [
+        [
+          0.028,
+          0.522
+        ],
+        [
+          0.323,
+          0.522
+        ]
+      ],
+      "allowed_orientations": [
+        "binned"
+      ]
+    },
+    {
+      "id": "B/L1",
+      "module": "B",
+      "level": "L1",
+      "support": "basket",
+      "polygon": [
+        [
+          0.658,
+          0.456
+        ],
+        [
+          0.974,
+          0.458
+        ],
+        [
+          0.974,
+          0.521
+        ],
+        [
+          0.658,
+          0.521
+        ]
+      ],
+      "support_line": [
+        [
+          0.658,
+          0.521
+        ],
+        [
+          0.974,
+          0.521
+        ]
+      ],
+      "allowed_orientations": [
+        "binned"
+      ]
+    }
+  ],
+  "protected_regions": [
+    {
+      "id": "ceiling",
+      "polygon": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0.1
+        ],
+        [
+          0,
+          0.1
+        ]
+      ]
+    },
+    {
+      "id": "foreground",
+      "polygon": [
+        [
+          0,
+          0.95
+        ],
+        [
+          1,
+          0.95
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    }
+  ],
+  "constraints": [
+    "保留镜头、货架数量、层板位置、立柱、顶棚与地面",
+    "只编辑本次选定格位；其他可见区域不作为新增陈列区",
+    "商品可遮挡选中格内背板；不得穿越格位支撑和立柱",
+    "未知实际尺寸；concept_assumption仅为可改设计参数"
+  ]
+}

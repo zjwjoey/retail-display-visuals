@@ -1,4 +1,4 @@
 interface:
   display_name: "商超陈列效果图"
-  short_description: "根据参考图设计完整货架墙近景与商超大景，控制商品分区、空间和成套一致性"
-  default_prompt: "使用 $retail-display-visuals，根据参考图制作商超陈列效果图，先确定货架墙近景或空间大景，再生成并检查。"
+  short_description: "用空架模板标定格位、选择商品上货，制作完整墙、大景与局部陈列并逐项验收"
+  default_prompt: "使用 $retail-display-visuals，根据空货架或门店参考图制作陈列效果图；有底图时先标定格位、编译上货计划，再生成并检查。"

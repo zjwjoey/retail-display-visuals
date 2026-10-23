@@ -1,0 +1,207 @@
+{
+  "schema_version": "shelf-template/1.0",
+  "template_id": "E004",
+  "name": "侧视挂钩墙",
+  "kind": "oblique_peg",
+  "calibration": "manual_visible_scope",
+  "scope": "左侧近景三行挂区，杆件微结构未认证",
+  "image": {
+    "path": "../images/E004.png",
+    "width": 941,
+    "height": 1672,
+    "sha256": "07b8ceb5ad5d6e5a7a9fadf79ed9fc9866b041b8c15cfd551419273f3bbbc8ce"
+  },
+  "provenance": {
+    "kind": "user_provided_reference_unverified",
+    "source": "G:\\1.视频素材\\ai视频资料\\3.货架模板\\image-gen-2(20260911-142553).png",
+    "verified_real_measurements": false
+  },
+  "placement": {
+    "camera": "fixed_to_template_image",
+    "same_scene_with_other_templates": "not_established"
+  },
+  "slots": [
+    {
+      "id": "A/H1",
+      "module": "A",
+      "level": "H1",
+      "support": "peg",
+      "polygon": [
+        [
+          0.04,
+          0.22
+        ],
+        [
+          0.345,
+          0.277
+        ],
+        [
+          0.345,
+          0.354
+        ],
+        [
+          0.04,
+          0.321
+        ]
+      ],
+      "support_line": [
+        [
+          0.1,
+          0.242
+        ],
+        [
+          0.22,
+          0.267
+        ]
+      ],
+      "anchors": [
+        [
+          0.1,
+          0.242
+        ],
+        [
+          0.22,
+          0.267
+        ]
+      ]
+    },
+    {
+      "id": "A/H2",
+      "module": "A",
+      "level": "H2",
+      "support": "peg",
+      "polygon": [
+        [
+          0.04,
+          0.383
+        ],
+        [
+          0.345,
+          0.414
+        ],
+        [
+          0.345,
+          0.484
+        ],
+        [
+          0.04,
+          0.485
+        ]
+      ],
+      "support_line": [
+        [
+          0.1,
+          0.401
+        ],
+        [
+          0.22,
+          0.42
+        ]
+      ],
+      "anchors": [
+        [
+          0.1,
+          0.401
+        ],
+        [
+          0.22,
+          0.42
+        ]
+      ]
+    },
+    {
+      "id": "A/H3",
+      "module": "A",
+      "level": "H3",
+      "support": "peg",
+      "polygon": [
+        [
+          0.04,
+          0.548
+        ],
+        [
+          0.345,
+          0.552
+        ],
+        [
+          0.345,
+          0.628
+        ],
+        [
+          0.04,
+          0.658
+        ]
+      ],
+      "support_line": [
+        [
+          0.1,
+          0.565
+        ],
+        [
+          0.22,
+          0.571
+        ]
+      ],
+      "anchors": [
+        [
+          0.1,
+          0.565
+        ],
+        [
+          0.22,
+          0.571
+        ]
+      ]
+    }
+  ],
+  "protected_regions": [
+    {
+      "id": "ceiling",
+      "polygon": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0.1
+        ],
+        [
+          0,
+          0.1
+        ]
+      ]
+    },
+    {
+      "id": "foreground",
+      "polygon": [
+        [
+          0,
+          0.95
+        ],
+        [
+          1,
+          0.95
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    }
+  ],
+  "constraints": [
+    "保留镜头、货架数量、层板位置、立柱、顶棚与地面",
+    "只编辑本次选定格位；其他可见区域不作为新增陈列区",
+    "商品可遮挡选中格内背板；不得穿越格位支撑和立柱",
+    "未知实际尺寸；concept_assumption仅为可改设计参数"
+  ]
+}

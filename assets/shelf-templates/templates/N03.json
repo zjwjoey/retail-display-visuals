@@ -1,0 +1,219 @@
+{
+  "schema_version": "shelf-template/1.0",
+  "template_id": "N03",
+  "name": "三层低端架",
+  "kind": "low_endcap",
+  "calibration": "reviewed_visible_scope",
+  "scope": "上台面与下部两个可见格位",
+  "image": {
+    "path": "../images/N03_low_endcap.png",
+    "width": 1448,
+    "height": 1086,
+    "sha256": "d13172ec54882ea7f12aca4b31502350546aec127c20d7c703335653dc6814c2"
+  },
+  "provenance": {
+    "kind": "generated_empty_template",
+    "source": "C:\\Users\\Administrator\\.codex\\generated_images\\01a167b2-b757-7c33-a885-0bd2cf9ee908\\exec-188cb02e-e3ec-4d20-9fb0-8c4116e1b1d5.png",
+    "verified_real_measurements": false
+  },
+  "placement": {
+    "camera": "fixed_to_template_image",
+    "same_scene_with_other_templates": "not_established"
+  },
+  "slots": [
+    {
+      "id": "A/L1",
+      "module": "A",
+      "level": "L1",
+      "support": "platform",
+      "polygon": [
+        [
+          0.247,
+          0.175
+        ],
+        [
+          0.75,
+          0.177
+        ],
+        [
+          0.75,
+          0.31
+        ],
+        [
+          0.247,
+          0.301
+        ]
+      ],
+      "support_line": [
+        [
+          0.247,
+          0.301
+        ],
+        [
+          0.75,
+          0.31
+        ]
+      ]
+    },
+    {
+      "id": "A/L2",
+      "module": "A",
+      "level": "L2",
+      "support": "shelf",
+      "polygon": [
+        [
+          0.247,
+          0.349
+        ],
+        [
+          0.742,
+          0.361
+        ],
+        [
+          0.742,
+          0.468
+        ],
+        [
+          0.247,
+          0.454
+        ]
+      ],
+      "support_line": [
+        [
+          0.247,
+          0.454
+        ],
+        [
+          0.742,
+          0.468
+        ]
+      ]
+    },
+    {
+      "id": "A/L3",
+      "module": "A",
+      "level": "L3",
+      "support": "shelf",
+      "polygon": [
+        [
+          0.247,
+          0.523
+        ],
+        [
+          0.742,
+          0.54
+        ],
+        [
+          0.742,
+          0.649
+        ],
+        [
+          0.247,
+          0.623
+        ]
+      ],
+      "support_line": [
+        [
+          0.247,
+          0.623
+        ],
+        [
+          0.742,
+          0.649
+        ]
+      ]
+    }
+  ],
+  "protected_regions": [
+    {
+      "id": "ceiling",
+      "polygon": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0.1
+        ],
+        [
+          0,
+          0.1
+        ]
+      ]
+    },
+    {
+      "id": "foreground",
+      "polygon": [
+        [
+          0,
+          0.95
+        ],
+        [
+          1,
+          0.95
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "left_post",
+      "polygon": [
+        [
+          0.222,
+          0.314
+        ],
+        [
+          0.241,
+          0.314
+        ],
+        [
+          0.241,
+          0.722
+        ],
+        [
+          0.222,
+          0.722
+        ]
+      ]
+    },
+    {
+      "id": "right_post",
+      "polygon": [
+        [
+          0.748,
+          0.314
+        ],
+        [
+          0.767,
+          0.314
+        ],
+        [
+          0.767,
+          0.779
+        ],
+        [
+          0.748,
+          0.779
+        ]
+      ]
+    }
+  ],
+  "constraints": [
+    "保留镜头、货架数量、层板位置、立柱、顶棚与地面",
+    "只编辑本次选定格位；其他可见区域不作为新增陈列区",
+    "商品可遮挡选中格内背板；不得穿越格位支撑和立柱",
+    "未知实际尺寸；concept_assumption仅为可改设计参数"
+  ]
+}

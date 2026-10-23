@@ -1,0 +1,247 @@
+{
+  "schema_version": "shelf-template/1.0",
+  "template_id": "E006",
+  "name": "五行挂钩加下层托板端架",
+  "kind": "mixed_endcap",
+  "calibration": "manual_visible_scope",
+  "scope": "端面两行挂区及下部两格；未标侧面",
+  "image": {
+    "path": "../images/E006.png",
+    "width": 941,
+    "height": 1672,
+    "sha256": "48c5018455d6fa5d7b0e0bc632e4d486f1333812a740aa15936255eb869f3f7c"
+  },
+  "provenance": {
+    "kind": "user_provided_reference_unverified",
+    "source": "G:\\1.视频素材\\ai视频资料\\3.货架模板\\image-gen-4(20260911-134142).png",
+    "verified_real_measurements": false
+  },
+  "placement": {
+    "camera": "fixed_to_template_image",
+    "same_scene_with_other_templates": "not_established"
+  },
+  "slots": [
+    {
+      "id": "A/H1",
+      "module": "A",
+      "level": "H1",
+      "support": "peg",
+      "polygon": [
+        [
+          0.335,
+          0.271
+        ],
+        [
+          0.762,
+          0.286
+        ],
+        [
+          0.762,
+          0.318
+        ],
+        [
+          0.335,
+          0.305
+        ]
+      ],
+      "support_line": [
+        [
+          0.36,
+          0.265
+        ],
+        [
+          0.57,
+          0.274
+        ]
+      ],
+      "anchors": [
+        [
+          0.36,
+          0.265
+        ],
+        [
+          0.43,
+          0.268
+        ],
+        [
+          0.5,
+          0.271
+        ],
+        [
+          0.57,
+          0.274
+        ]
+      ]
+    },
+    {
+      "id": "A/H2",
+      "module": "A",
+      "level": "H2",
+      "support": "peg",
+      "polygon": [
+        [
+          0.335,
+          0.341
+        ],
+        [
+          0.762,
+          0.354
+        ],
+        [
+          0.762,
+          0.388
+        ],
+        [
+          0.335,
+          0.376
+        ]
+      ],
+      "support_line": [
+        [
+          0.36,
+          0.335
+        ],
+        [
+          0.57,
+          0.344
+        ]
+      ],
+      "anchors": [
+        [
+          0.36,
+          0.335
+        ],
+        [
+          0.43,
+          0.338
+        ],
+        [
+          0.5,
+          0.341
+        ],
+        [
+          0.57,
+          0.344
+        ]
+      ]
+    },
+    {
+      "id": "A/L1",
+      "module": "A",
+      "level": "L1",
+      "support": "shelf",
+      "polygon": [
+        [
+          0.334,
+          0.585
+        ],
+        [
+          0.771,
+          0.577
+        ],
+        [
+          0.771,
+          0.636
+        ],
+        [
+          0.334,
+          0.64
+        ]
+      ],
+      "support_line": [
+        [
+          0.334,
+          0.64
+        ],
+        [
+          0.771,
+          0.636
+        ]
+      ]
+    },
+    {
+      "id": "A/L2",
+      "module": "A",
+      "level": "L2",
+      "support": "shelf",
+      "polygon": [
+        [
+          0.334,
+          0.656
+        ],
+        [
+          0.771,
+          0.651
+        ],
+        [
+          0.771,
+          0.71
+        ],
+        [
+          0.334,
+          0.715
+        ]
+      ],
+      "support_line": [
+        [
+          0.334,
+          0.715
+        ],
+        [
+          0.771,
+          0.71
+        ]
+      ]
+    }
+  ],
+  "protected_regions": [
+    {
+      "id": "ceiling",
+      "polygon": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          0.1
+        ],
+        [
+          0,
+          0.1
+        ]
+      ]
+    },
+    {
+      "id": "foreground",
+      "polygon": [
+        [
+          0,
+          0.95
+        ],
+        [
+          1,
+          0.95
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    }
+  ],
+  "constraints": [
+    "保留镜头、货架数量、层板位置、立柱、顶棚与地面",
+    "只编辑本次选定格位；其他可见区域不作为新增陈列区",
+    "商品可遮挡选中格内背板；不得穿越格位支撑和立柱",
+    "未知实际尺寸；concept_assumption仅为可改设计参数"
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "schema_version": "shelf-plan/1.0",
+  "template_id": "E008",
+  "scene_id": "TEMPLATE_E008_DEMO",
+  "business": {
+    "format": "general_merchandise",
+    "scope": "left_bin_test"
+  },
+  "products": {
+    "BUCKET": {
+      "name": "橙色南瓜糖果桶",
+      "reference_path": "../products/bucket.jpeg",
+      "dimensions_cm": {
+        "width": 18,
+        "height": 14
+      },
+      "identity_constraints": [
+        "原黑脸谱、黑提手；低格提手放下"
+      ],
+      "display_envelopes_cm": {
+        "upright": {
+          "width": 18,
+          "height": 14,
+          "depth": null,
+          "basis": "catalog_width_height"
+        },
+        "binned": {
+          "width": 18,
+          "height": 14,
+          "depth": null,
+          "basis": "catalog_width_height"
+        }
+      }
+    }
+  },
+  "bindings": [
+    {
+      "slot_id": "A/L1",
+      "product_id": "BUCKET",
+      "orientation": "binned",
+      "front_count": 3,
+      "depth_count": 1,
+      "gap_cm": 0
+    }
+  ]
+}

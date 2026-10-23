@@ -1,0 +1,106 @@
+{
+  "schema_version": "shelf-catalog/1.0",
+  "engine_version": "0.1",
+  "templates": [
+    {
+      "id": "E001",
+      "name": "中轴通道·前景中岛",
+      "kind": "island_aisle",
+      "profile": "templates/E001.json",
+      "slots": 4,
+      "calibration": "manual_visible_scope",
+      "scope": "仅前景端面四个可见内格，不标后排货架"
+    },
+    {
+      "id": "E002",
+      "name": "侧视长墙·近侧一格",
+      "kind": "oblique_wall",
+      "profile": "templates/E002.json",
+      "slots": 3,
+      "calibration": "manual_visible_scope",
+      "scope": "近侧完整模块的中下部三格"
+    },
+    {
+      "id": "E003",
+      "name": "木背板侧墙·局部格位",
+      "kind": "oblique_wall",
+      "profile": "templates/E003.json",
+      "slots": 3,
+      "calibration": "manual_visible_scope",
+      "scope": "靠近镜头模块的三个中下格"
+    },
+    {
+      "id": "E004",
+      "name": "侧视挂钩墙",
+      "kind": "oblique_peg",
+      "profile": "templates/E004.json",
+      "slots": 3,
+      "calibration": "manual_visible_scope",
+      "scope": "左侧近景三行挂区，杆件微结构未认证"
+    },
+    {
+      "id": "E005",
+      "name": "近景层板交汇",
+      "kind": "oblique_partial",
+      "profile": "templates/E005.json",
+      "slots": 2,
+      "calibration": "manual_visible_scope",
+      "scope": "右侧靠近镜头、立柱左侧完整模块的两个内格；不跨中间立柱，不开放被裁切的最右模块"
+    },
+    {
+      "id": "E006",
+      "name": "五行挂钩加下层托板端架",
+      "kind": "mixed_endcap",
+      "profile": "templates/E006.json",
+      "slots": 4,
+      "calibration": "manual_visible_scope",
+      "scope": "端面两行挂区及下部两格；未标侧面"
+    },
+    {
+      "id": "E007",
+      "name": "形象展区·中间低桌",
+      "kind": "table_zone",
+      "profile": "templates/E007.json",
+      "slots": 1,
+      "calibration": "manual_visible_scope",
+      "scope": "只开放中间桌面上方的商品遮挡区，后墙不是同一平面"
+    },
+    {
+      "id": "E008",
+      "name": "入口大景·双促销筐",
+      "kind": "bin_aisle",
+      "profile": "templates/E008.json",
+      "slots": 2,
+      "calibration": "manual_visible_scope",
+      "scope": "只开放左右筐内上方，筐正面木板及边框保护"
+    },
+    {
+      "id": "N01",
+      "name": "正面双模块四层墙",
+      "kind": "front_wall",
+      "profile": "templates/N01.json",
+      "slots": 8,
+      "calibration": "reviewed_visible_scope",
+      "scope": "两模块各四个空格，全机位"
+    },
+    {
+      "id": "N02",
+      "name": "三排四钩加两层托板",
+      "kind": "front_mixed",
+      "profile": "templates/N02.json",
+      "slots": 5,
+      "calibration": "reviewed_visible_scope",
+      "scope": "三行挂区及两层托板；第三挂区适合较短挂件"
+    },
+    {
+      "id": "N03",
+      "name": "三层低端架",
+      "kind": "low_endcap",
+      "profile": "templates/N03.json",
+      "slots": 3,
+      "calibration": "reviewed_visible_scope",
+      "scope": "上台面与下部两个可见格位"
+    }
+  ],
+  "product_library": "products/library.json"
+}
