@@ -1,0 +1,344 @@
+{
+  "schema_version": "1.1",
+  "scene_id": "HALLOWEEN_001",
+  "business": {
+    "format": "general_merchandise",
+    "display_scope": "seasonal_zone",
+    "theme": "Halloween",
+    "background_assortment": [
+      "household_storage",
+      "kitchenware",
+      "cleaning"
+    ],
+    "notes": "示例为概念陈列，不是实际SKU或库存清单"
+  },
+  "assets": {
+    "wall_anchor": {
+      "path": "baseline/01_wall.png",
+      "role": "layout_anchor",
+      "approval": "layout_only",
+      "limitations": [
+        "商品尺寸和脸谱未通过；图像不覆盖商品原图尺寸约束"
+      ]
+    },
+    "store_photo": {
+      "path": "baseline/store_photo.png",
+      "role": "edit_target"
+    }
+  },
+  "products": {
+    "PLATE": {
+      "name": "南瓜造型盘",
+      "reference_path": "products/pumpkin_plate.jpeg",
+      "dimensions_cm": {
+        "width": 40,
+        "height": 32
+      },
+      "dimension_source": "visible_catalog",
+      "variants": [
+        "orange",
+        "purple",
+        "black"
+      ],
+      "identity_constraints": [
+        "南瓜轮廓与浮雕线，不加脸谱"
+      ],
+      "packaging_status": "not_verified"
+    },
+    "GOBLET": {
+      "name": "蜘蛛高脚杯",
+      "reference_path": "products/spider_goblet.jpeg",
+      "dimensions_cm": {
+        "height": 18
+      },
+      "dimension_source": "visible_catalog",
+      "variants": [
+        "red_silver"
+      ],
+      "identity_constraints": [
+        "红色杯身、银色蜘蛛装饰、银柄、蛛网圆底"
+      ],
+      "packaging_status": "not_verified"
+    },
+    "LANTERN": {
+      "name": "南瓜灯",
+      "reference_path": "products/pumpkin_lantern.jpeg",
+      "dimensions_cm": {
+        "width": 13,
+        "height": 11
+      },
+      "dimension_source": "visible_catalog",
+      "identity_constraints": [
+        "原图斜眼、嘴形、橙色梗及麻绳环"
+      ],
+      "packaging_status": "not_verified"
+    },
+    "BUCKET": {
+      "name": "南瓜桶",
+      "reference_path": "products/pumpkin_bucket.jpeg",
+      "dimensions_cm": {
+        "width": 18,
+        "height": 14
+      },
+      "dimension_source": "visible_catalog",
+      "identity_constraints": [
+        "黑提手与原图印刷脸谱"
+      ],
+      "packaging_status": "not_verified"
+    },
+    "HEADBAND": {
+      "name": "蜘蛛网迷你帽发箍",
+      "reference_path": "products/hat_headband.jpeg",
+      "dimensions_cm": {
+        "width": 15,
+        "height": 30
+      },
+      "dimension_source": "visible_catalog",
+      "variants": [
+        "orange",
+        "purple"
+      ],
+      "identity_constraints": [
+        "U形发箍、迷你尖帽、蛛网、骷髅与羽毛"
+      ],
+      "packaging_status": "concept_bag"
+    }
+  },
+  "fixtures": {
+    "W01": {
+      "kind": "wall_fixture",
+      "placement": {
+        "mounting": "against_rear_wall",
+        "faces": "main_aisle",
+        "neighbors": {
+          "left": "household_storage",
+          "right": "cleaning"
+        }
+      },
+      "module_order": [
+        "A",
+        "B",
+        "C"
+      ],
+      "modules": {
+        "A": {
+          "levels_top_to_bottom": [
+            {
+              "id": "L1",
+              "support": "shelf",
+              "items": [
+                {
+                  "product_id": "PLATE",
+                  "orientation": "upright",
+                  "variant_order": [
+                    "orange",
+                    "purple",
+                    "black"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "L2",
+              "support": "shelf",
+              "items": [
+                {
+                  "product_id": "PLATE",
+                  "orientation": "stacked_flat",
+                  "variant_order": [
+                    "orange",
+                    "purple",
+                    "black"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "L3",
+              "support": "shelf",
+              "items": [
+                {
+                  "product_id": "GOBLET",
+                  "orientation": "upright"
+                }
+              ]
+            },
+            {
+              "id": "L4",
+              "support": "shelf",
+              "items": [
+                {
+                  "product_id": "GOBLET",
+                  "orientation": "upright"
+                }
+              ]
+            }
+          ]
+        },
+        "B": {
+          "levels_top_to_bottom": [
+            {
+              "id": "L1",
+              "support": "shelf",
+              "items": [
+                {
+                  "product_id": "LANTERN",
+                  "orientation": "upright"
+                }
+              ]
+            },
+            {
+              "id": "L2",
+              "support": "shelf",
+              "items": [
+                {
+                  "product_id": "LANTERN",
+                  "orientation": "upright"
+                }
+              ]
+            },
+            {
+              "id": "L3",
+              "support": "shelf",
+              "items": [
+                {
+                  "product_id": "BUCKET",
+                  "orientation": "upright"
+                }
+              ]
+            },
+            {
+              "id": "L4",
+              "support": "shelf",
+              "items": [
+                {
+                  "product_id": "BUCKET",
+                  "orientation": "upright"
+                }
+              ]
+            }
+          ]
+        },
+        "C": {
+          "levels_top_to_bottom": [
+            {
+              "id": "L1",
+              "support": "peg",
+              "items": [
+                {
+                  "product_id": "HEADBAND",
+                  "orientation": "hanging",
+                  "variant_order": [
+                    "orange",
+                    "purple"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "L2",
+              "support": "peg",
+              "items": [
+                {
+                  "product_id": "HEADBAND",
+                  "orientation": "hanging",
+                  "variant_order": [
+                    "orange",
+                    "purple"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "L3",
+              "support": "peg",
+              "items": [
+                {
+                  "product_id": "HEADBAND",
+                  "orientation": "hanging",
+                  "variant_order": [
+                    "orange",
+                    "purple"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "L4",
+              "support": "shelf",
+              "items": [
+                {
+                  "product_id": "HEADBAND",
+                  "orientation": "flat_bag"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "views": {
+    "V01": {
+      "mode": "full_wall",
+      "relation": "anchor",
+      "scene_id": "HALLOWEEN_001",
+      "fixture_id": "W01",
+      "level_selection": "all",
+      "asset_id": "wall_anchor"
+    },
+    "V02": {
+      "mode": "wide",
+      "relation": "same_fixture",
+      "scene_id": "HALLOWEEN_001",
+      "anchor_view": "V01",
+      "fixture_id": "W01",
+      "level_selection": "all",
+      "locked": [
+        "fixture_structure",
+        "layer_assignment",
+        "product_identity"
+      ],
+      "allowed_changes": [
+        "background_assortment",
+        "background_layout"
+      ]
+    },
+    "V03_DETAIL": {
+      "mode": "detail",
+      "relation": "same_fixture",
+      "scene_id": "HALLOWEEN_001",
+      "anchor_view": "V01",
+      "fixture_id": "W01",
+      "level_selection": {
+        "A": [
+          "L1",
+          "L2",
+          "L3",
+          "L4"
+        ]
+      },
+      "allowed_changes": [
+        "camera",
+        "crop"
+      ]
+    },
+    "V04_EDIT": {
+      "mode": "local_edit",
+      "relation": "independent",
+      "scene_id": "STORE_ST008",
+      "fixture_id": null,
+      "base_asset": "store_photo",
+      "edit_region": "前景左侧一格，顶层托盘以下；保留原层板",
+      "preserve_regions": [
+        "顶层托盘",
+        "右侧杯具与箱体",
+        "顶棚、灯具、地面、镜头"
+      ],
+      "allowed_changes": [
+        "目标格商品",
+        "目标格过时标签"
+      ]
+    }
+  }
+}
